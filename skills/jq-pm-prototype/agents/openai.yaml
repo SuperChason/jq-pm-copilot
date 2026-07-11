@@ -1,0 +1,7 @@
+interface:
+  display_name: "企业产品原型"
+  short_description: "基于 PRD 与企业 UI 规范制作可点击、可评审的高保真产品原型"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-prototype 根据这份 PRD 制作符合企业 UI 规范的可点击原型。"
+policy:
+  allow_implicit_invocation: true

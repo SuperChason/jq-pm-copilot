@@ -1,0 +1,7 @@
+interface:
+  display_name: "企业 PRD"
+  short_description: "基于已确认材料编写可评审、可开发、可测试、可验收的正式产品需求文档"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-prd 把这些已确认需求整理成可评审和可验收的 PRD。"
+policy:
+  allow_implicit_invocation: true

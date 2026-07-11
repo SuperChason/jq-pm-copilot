@@ -1,0 +1,7 @@
+interface:
+  display_name: "企业产品研究"
+  short_description: "围绕产品决策开展可信调研，核验来源并提炼产品启发和下一步行动"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-research 调研这个产品问题并给出有依据的行动建议。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>企业企业产品原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <aside class="sidebar" aria-label="主导航">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">EP</span>
+        <span>企业产品</span>
+      </div>
+      <nav class="nav-list">
+        <a class="nav-item" href="#">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+          工作台
+        </a>
+        <a class="nav-item active" href="#" aria-current="page">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5zM8 10h8M8 14h8M8 18h5"/></svg>
+          单据管理
+        </a>
+        <a class="nav-item" href="#">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20V10l8-6 8 6v10h-5v-6H9v6z"/></svg>
+          规则中心
+        </a>
+        <a class="nav-item" href="#">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
+          运行分析
+        </a>
+      </nav>
+    </aside>
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">智能审核平台</p>
+        <h1>单据管理</h1>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-button" type="button" aria-label="查看通知">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0v5l2 3H4l2-3zM10 20h4"/></svg>
+        </button>
+        <button class="user-button" type="button">
+          <span class="avatar" aria-hidden="true">张</span>
+          张超
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" class="main">
+      <section class="summary-grid" aria-label="运行概览">
+        <article class="metric-card">
+          <span>今日审核单据</span>
+          <strong>1,286</strong>
+          <small><span class="trend-up">↑ 12.6%</span> 较昨日</small>
+        </article>
+        <article class="metric-card">
+          <span>自动通过率</span>
+          <strong>82.4%</strong>
+          <small><span class="trend-up">↑ 3.2%</span> 较上周</small>
+        </article>
+        <article class="metric-card">
+          <span>待人工复核</span>
+          <strong>46</strong>
+          <small><span class="trend-warning">8 笔</span> 即将超时</small>
+        </article>
+      </section>
+
+      <section class="page-card" aria-labelledby="list-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="list-title">审核单据</h2>
+            <p>查看智能审核结果并处理需要人工复核的单据。</p>
+          </div>
+          <button class="button primary" type="button" data-open-modal>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            新建任务
+          </button>
+        </div>
+
+        <form class="filters" aria-label="单据筛选">
+          <label>
+            <span>关键词</span>
+            <input type="search" name="keyword" placeholder="单据编号或申请人" />
+          </label>
+          <label>
+            <span>审核状态</span>
+            <select name="status">
+              <option value="">全部状态</option>
+              <option>自动通过</option>
+              <option>待人工复核</option>
+              <option>已驳回</option>
+            </select>
+          </label>
+          <label>
+            <span>业务类型</span>
+            <select name="type">
+              <option value="">全部类型</option>
+              <option>差旅报销</option>
+              <option>采购付款</option>
+              <option>费用申请</option>
+            </select>
+          </label>
+          <div class="filter-actions">
+            <button class="button primary" type="submit">查询</button>
+            <button class="button secondary" type="reset">重置</button>
+          </div>
+        </form>
+
+        <div class="table-toolbar">
+          <p aria-live="polite">共 1286 条记录</p>
+          <button class="button text" type="button" data-toggle-empty>切换空状态</button>
+        </div>
+
+        <div class="table-wrap" data-table-view>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">单据编号</th>
+                <th scope="col">业务类型</th>
+                <th scope="col">申请人</th>
+                <th scope="col">申请金额</th>
+                <th scope="col">审核状态</th>
+                <th scope="col">更新时间</th>
+                <th scope="col" class="action-column">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="#">BX202607110023</a></td>
+                <td>差旅报销</td>
+                <td>王敏</td>
+                <td class="number">¥ 8,460.00</td>
+                <td><span class="status warning">待人工复核</span></td>
+                <td>2026-07-11 14:32</td>
+                <td class="action-column"><button class="button text small" type="button">去处理</button></td>
+              </tr>
+              <tr>
+                <td><a href="#">FK202607110018</a></td>
+                <td>采购付款</td>
+                <td>李宁</td>
+                <td class="number">¥ 32,800.00</td>
+                <td><span class="status success">自动通过</span></td>
+                <td>2026-07-11 14:21</td>
+                <td class="action-column"><button class="button text small" type="button">查看</button></td>
+              </tr>
+              <tr>
+                <td><a href="#">FY202607110011</a></td>
+                <td>费用申请</td>
+                <td>赵洁</td>
+                <td class="number">¥ 1,260.00</td>
+                <td><span class="status error">已驳回</span></td>
+                <td>2026-07-11 13:58</td>
+                <td class="action-column"><button class="button text small" type="button">查看</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <nav class="pagination" aria-label="分页">
+            <button class="icon-button small" type="button" aria-label="上一页" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg>
+            </button>
+            <button class="page-button active" type="button" aria-current="page">1</button>
+            <button class="page-button" type="button">2</button>
+            <button class="page-button" type="button">3</button>
+            <button class="icon-button small" type="button" aria-label="下一页">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></svg>
+            </button>
+          </nav>
+        </div>
+
+        <div class="empty-state" data-empty-view hidden>
+          <svg aria-hidden="true" viewBox="0 0 64 64"><path d="M12 17h40v34H12zM20 11h24v12H20zM23 35h18M27 43h10"/></svg>
+          <h3>没有找到相关结果</h3>
+          <p>请调整筛选条件后重新查询。</p>
+          <button class="button secondary" type="button" data-clear-empty>清除筛选</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" data-modal hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <h2 id="modal-title">新建审核任务</h2>
+          <button class="icon-button" type="button" aria-label="关闭弹窗" data-close-modal>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <form class="modal-body" data-create-form>
+          <label>
+            <span>任务名称 <em aria-hidden="true">*</em></span>
+            <input name="name" required placeholder="例如：7 月差旅单据抽检" />
+          </label>
+          <label>
+            <span>业务类型 <em aria-hidden="true">*</em></span>
+            <select name="type" required>
+              <option value="">请选择</option>
+              <option>差旅报销</option>
+              <option>采购付款</option>
+            </select>
+          </label>
+          <label>
+            <span>任务说明</span>
+            <textarea name="note" rows="4" placeholder="补充任务范围和审核重点"></textarea>
+          </label>
+          <div class="modal-footer">
+            <button class="button secondary" type="button" data-close-modal>取消</button>
+            <button class="button primary" type="submit">创建任务</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" role="status" aria-live="polite" hidden data-toast>
+      任务已创建，可以继续配置审核规则。
+    </div>
+  </body>
+</html>

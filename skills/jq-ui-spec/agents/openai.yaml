@@ -1,0 +1,7 @@
+interface:
+  display_name: "企业 UI 规范"
+  short_description: "按企业域设计基线生成、改造和审查 PC 端后台产品界面与交互状态"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-ui-spec 生成或审查这个企业产品界面，确保符合企业 UI 基线。"
+policy:
+  allow_implicit_invocation: true

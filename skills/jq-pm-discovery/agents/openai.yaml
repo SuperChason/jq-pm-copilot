@@ -1,0 +1,7 @@
+interface:
+  display_name: "企业产品发现"
+  short_description: "结构化澄清产品价值、用户场景、范围、规则和关键决策，形成发现简报"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-discovery 帮我澄清这个产品想法并形成产品发现简报。"
+policy:
+  allow_implicit_invocation: true

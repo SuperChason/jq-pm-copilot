@@ -1,0 +1,7 @@
+interface:
+  display_name: "企业产品评审"
+  short_description: "压力测试 PRD 与原型，定位关键缺口并给出可直接修改的分级评审清单"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-review 评审这份 PRD 和原型，给出可直接修改的分级清单。"
+policy:
+  allow_implicit_invocation: true
