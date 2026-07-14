@@ -1,0 +1,7 @@
+interface:
+  display_name: "产品拷问引擎"
+  short_description: "逐题压力测试产品想法、方案和关键决策，并可同步沉淀文档"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-grilling 逐题拷问这个产品方案，并在形成决定时更新产品上下文。"
+policy:
+  allow_implicit_invocation: true
