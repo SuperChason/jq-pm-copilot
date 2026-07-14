@@ -3,7 +3,9 @@
 ## 来源
 
 - 项目：mattpocock/skills
-- 来源目录：skills/productivity/grilling、skills/engineering/grill-me、skills/engineering/grill-with-docs、skills/engineering/domain-modeling
+- 来源目录：skills/productivity/grilling、skills/productivity/grill-me、skills/engineering/grill-with-docs、skills/engineering/domain-modeling
+- 上游基准：main 分支提交 697d4ce，2026-07-13
+- 上游提交：https://github.com/mattpocock/skills/commit/697d4ce9742da558fd1ba6697c8e9775e2e302dd
 - 许可：MIT License，全文见 mattpocock-skills-LICENSE.txt
 
 ## 本仓库中的使用方式
@@ -25,3 +27,9 @@ jq-pm-grilling 吸收并重新组织了以下公开方法：
 - 与调研、PRD、原型、评审和汇报 Skill 的阶段流转协议。
 
 原始项目名称和方法来源仅用于许可与溯源说明。jq-pm-grilling 的中文流程、文件协议和产品阶段协作规则由本仓库重新设计。
+
+## Codex 调用策略
+
+上游 grill-me 通过 agents/openai.yaml 设置 allow_implicit_invocation: false，只在用户显式输入 $grill-me 时调用。
+
+jq-pm-copilot 中的 jq-pm-grilling 设置 allow_implicit_invocation: true，用于自动承接产品拷问任务，并供 jq-pm-discovery 和 jq-pm-review 复用。两者的调用策略按各自职责保留。
