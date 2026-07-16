@@ -819,6 +819,14 @@ codex plugin marketplace add SuperChason/jq-pm-copilot --ref main
 codex plugin add jq-pm-copilot@jq-pm-copilot
 ```
 
+当前网络或代理导致 Codex 无法直接拉取 Marketplace 时，让 AI 自动采用本地快照兜底：
+
+```bash
+git clone --branch v0.3.0 --depth 1 https://github.com/SuperChason/jq-pm-copilot.git
+codex plugin marketplace add ./jq-pm-copilot
+codex plugin add jq-pm-copilot@jq-pm-copilot
+```
+
 安装后开始一个新任务，让新 Skill 进入上下文。更新时由 Codex 刷新 Marketplace，再重新安装当前正式版本。
 
 ### Claude Code
