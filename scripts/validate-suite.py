@@ -76,8 +76,6 @@ def validate_versions() -> str:
 
     codex_marketplace = load_json(ROOT / ".agents" / "plugins" / "marketplace.json")
     claude_marketplace = load_json(ROOT / ".claude-plugin" / "marketplace.json")
-    expected_ref = f"v{version}"
-
     codex_plugins = codex_marketplace.get("plugins", [])
     claude_plugins = claude_marketplace.get("plugins", [])
     if len(codex_plugins) != 1 or len(claude_plugins) != 1:
@@ -86,9 +84,10 @@ def validate_versions() -> str:
         fail("Codex Marketplace 插件名称错误")
     if claude_plugins[0].get("name") != "jq-pm-copilot":
         fail("Claude Marketplace 插件名称错误")
-    if codex_plugins[0].get("source", {}).get("ref") != expected_ref:
-        fail("Codex Marketplace 的发布标签与插件版本不一致")
-    if claude_plugins[0].get("source", {}).get("ref") != expected_ref:
+    codex_source = codex_plugins[0].get("source", {})
+    if codex_source.get("source") != "local" or codex_source.get("path") != "./":
+        fail("Codex Marketplace 必须直接安装仓库根目录中的插件")
+    if claude_plugins[0].get("source", {}).get("ref") != f"v{version}":
         fail("Claude Marketplace 的发布标签与插件版本不一致")
     if claude_plugins[0].get("version") != version:
         fail("Claude Marketplace 的插件版本与插件清单不一致")
