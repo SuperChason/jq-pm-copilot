@@ -1,0 +1,33 @@
+{
+  "name": "jq-pm-copilot",
+  "description": "面向企业产品经理的完整工作流 Skill 套件。",
+  "owner": {
+    "name": "SuperChason"
+  },
+  "plugins": [
+    {
+      "name": "jq-pm-copilot",
+      "source": {
+        "source": "github",
+        "repo": "SuperChason/jq-pm-copilot",
+        "ref": "v0.3.0"
+      },
+      "description": "企业产品经理工作台，包含 8 个互相衔接的产品管理 Skill。",
+      "version": "0.3.0",
+      "author": {
+        "name": "SuperChason"
+      },
+      "homepage": "https://github.com/SuperChason/jq-pm-copilot",
+      "repository": "https://github.com/SuperChason/jq-pm-copilot",
+      "license": "UNLICENSED",
+      "category": "productivity",
+      "tags": [
+        "product-management",
+        "prd",
+        "prototype",
+        "research",
+        "review"
+      ]
+    }
+  ]
+}

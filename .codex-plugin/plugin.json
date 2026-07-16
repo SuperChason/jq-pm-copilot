@@ -1,10 +1,13 @@
 {
   "name": "jq-pm-copilot",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "企业产品经理工作台，覆盖产品拷问、需求发现、调研、PRD、原型、评审、汇报与企业 UI 规范。",
   "author": {
-    "name": "产品团队"
+    "name": "SuperChason",
+    "url": "https://github.com/SuperChason"
   },
+  "homepage": "https://github.com/SuperChason/jq-pm-copilot",
+  "repository": "https://github.com/SuperChason/jq-pm-copilot",
   "license": "UNLICENSED",
   "keywords": [
     "product-management",
@@ -18,8 +21,8 @@
   "interface": {
     "displayName": "企业产品经理 Copilot",
     "shortDescription": "从需求澄清到原型评审与汇报的一体化产品工作台",
-    "longDescription": "面向企业产品经理的 Skill 套件，以逐题拷问和产品上下文贯通产品发现、可信调研、PRD 编写、企业原型、交付评审和汇报表达。",
-    "developerName": "产品团队",
+    "longDescription": "面向企业产品经理的多平台 Skill 套件，以逐题拷问和产品上下文贯通产品发现、可信调研、PRD 编写、企业原型、交付评审和汇报表达。",
+    "developerName": "SuperChason",
     "category": "Productivity",
     "capabilities": [
       "Research",
@@ -30,8 +33,7 @@
     "defaultPrompt": [
       "帮我把这个产品想法澄清成可决策的需求简报。",
       "逐题拷问这个方案，并同步沉淀决定、假设和术语。",
-      "根据这份 PRD 制作符合企业 UI 规范的可点击原型。",
-      "评审这份 PRD 和原型，给出可直接修改的清单。"
+      "根据这份 PRD 制作企业原型并完成正式评审。"
     ],
     "brandColor": "#3E5BF2"
   }

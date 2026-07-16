@@ -1,0 +1,103 @@
+{
+  "version": "0.3.0",
+  "cases": [
+    {
+      "id": "discovery-from-vague-idea",
+      "prompt": "我们想做一个企业 AI 助手，但目标用户和首期范围还不清楚，帮我梳理。",
+      "expected_skills": [
+        "jq-pm-discovery"
+      ],
+      "must_behaviors": [
+        "区分事实、假设和未知项",
+        "形成一句话产品命题",
+        "重大未知项逐题处理"
+      ]
+    },
+    {
+      "id": "one-question-grilling",
+      "prompt": "逐题拷问这个产品方案，每次只问一个问题，并给出推荐答案和取舍。",
+      "expected_skills": [
+        "jq-pm-grilling"
+      ],
+      "must_behaviors": [
+        "每轮只问一个问题",
+        "维护决定、假设和未决问题",
+        "共享理解形成前不进入实现"
+      ]
+    },
+    {
+      "id": "evidence-backed-research",
+      "prompt": "调研主流企业 AI 审核产品的人工复核机制，关键结论必须有可信来源。",
+      "expected_skills": [
+        "jq-pm-research"
+      ],
+      "must_behaviors": [
+        "先明确要支持的产品决策",
+        "优先官方和一手来源",
+        "区分事实、推断和建议"
+      ]
+    },
+    {
+      "id": "executable-prd",
+      "prompt": "把这些已经确认的产品需求整理成可开发、可测试、可验收的正式 PRD。",
+      "expected_skills": [
+        "jq-pm-prd"
+      ],
+      "must_behaviors": [
+        "明确角色、流程、状态、规则、权限和异常",
+        "编写可观察、可判定的验收标准",
+        "把未确认内容放入待确认项"
+      ]
+    },
+    {
+      "id": "prd-to-prototype",
+      "prompt": "根据这份 PRD 制作企业后台可点击原型，补齐空态、错误、无权限和保存失败状态。",
+      "expected_skills": [
+        "jq-pm-prototype",
+        "jq-ui-spec"
+      ],
+      "must_behaviors": [
+        "建立完整任务链路",
+        "覆盖关键页面状态",
+        "记录 PRD 缺口和原型新增假设"
+      ]
+    },
+    {
+      "id": "formal-review",
+      "prompt": "正式评审这份 PRD 和原型，按 P0 到 P3 给出位置、影响、修改方式和验证方法。",
+      "expected_skills": [
+        "jq-pm-review"
+      ],
+      "must_behaviors": [
+        "给出明确评审结论",
+        "每个问题可以定位和验证",
+        "重大未知项进入逐题拷问"
+      ]
+    },
+    {
+      "id": "audience-briefing",
+      "prompt": "把这些项目材料整理成一版给领导的五分钟汇报，突出成果、风险和需要拍板的事项。",
+      "expected_skills": [
+        "jq-pm-briefing"
+      ],
+      "must_behaviors": [
+        "结论和业务影响优先",
+        "保持事实和版本准确",
+        "给出明确决策请求"
+      ]
+    },
+    {
+      "id": "capability-fallback",
+      "prompt": "当前环境没有浏览器和脚本执行能力，请继续审查这个原型。",
+      "expected_skills": [
+        "jq-pm-review",
+        "jq-ui-spec"
+      ],
+      "must_behaviors": [
+        "执行静态走查",
+        "提供人工验收清单",
+        "明确未完成视觉实测"
+      ]
+    }
+  ]
+}
