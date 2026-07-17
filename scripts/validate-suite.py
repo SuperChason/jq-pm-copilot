@@ -32,6 +32,9 @@ REFERENCE_PATTERN = re.compile(
     r"(?<![\w:/])((?:\.\./|references/|assets/|scripts/)"
     r"[A-Za-z0-9._/-]+\.(?:md|mjs|js|css|html))"
 )
+FIRST_PRINCIPLES_PROTOCOL = (
+    ROOT / "skills" / "jq-pm-grilling" / "references" / "first-principles-protocol.md"
+)
 
 
 def fail(message: str) -> None:
@@ -97,6 +100,8 @@ def validate_versions() -> str:
 
 def validate_skills() -> None:
     skills_root = ROOT / "skills"
+    if not FIRST_PRINCIPLES_PROTOCOL.is_file():
+        fail("缺少第一性原理产品推导协议")
     actual_skills = tuple(sorted(path.name for path in skills_root.iterdir() if path.is_dir()))
     if set(actual_skills) != set(EXPECTED_SKILLS):
         fail(
@@ -121,6 +126,8 @@ def validate_skills() -> None:
             fail(f"{skill_file.relative_to(ROOT)} 缺少 description")
         if "platform-capability-fallback.md" not in text:
             fail(f"{skill_file.relative_to(ROOT)} 未接入跨平台能力降级协议")
+        if "first-principles-protocol.md" not in text:
+            fail(f"{skill_file.relative_to(ROOT)} 未接入第一性原理产品推导协议")
 
         for relative_reference in REFERENCE_PATTERN.findall(text):
             target = (skill_dir / relative_reference).resolve()
@@ -175,6 +182,8 @@ def validate_evals(version: str) -> None:
     if covered_skills != set(EXPECTED_SKILLS):
         missing = set(EXPECTED_SKILLS) - covered_skills
         fail(f"跨平台验收题没有覆盖全部 Skill：{', '.join(sorted(missing))}")
+    if "first-principles-rebuild" not in seen_ids:
+        fail("跨平台验收题缺少第一性原理推导场景")
 
 
 def main() -> None:
@@ -184,6 +193,7 @@ def main() -> None:
     validate_sensitive_terms()
     print(f"PASS: jq-pm-copilot v{version}")
     print(f"PASS: {len(EXPECTED_SKILLS)} 个 Skill 目录、跨 Skill 引用和平台清单完整")
+    print("PASS: 全部 8 个 Skill 已接入第一性原理产品推导协议")
     print("PASS: 跨平台验收题覆盖全部 8 个 Skill")
     print("PASS: 未发现已配置的公司品牌词")
 
