@@ -35,6 +35,9 @@ REFERENCE_PATTERN = re.compile(
 FIRST_PRINCIPLES_PROTOCOL = (
     ROOT / "skills" / "jq-pm-grilling" / "references" / "first-principles-protocol.md"
 )
+PRODUCT_CONTEXT_PROTOCOL = (
+    ROOT / "skills" / "jq-pm-grilling" / "references" / "product-context-protocol.md"
+)
 
 
 def fail(message: str) -> None:
@@ -140,6 +143,34 @@ def validate_skills() -> None:
                 )
 
 
+def validate_v041_behavior() -> None:
+    grilling = (ROOT / "skills" / "jq-pm-grilling" / "SKILL.md").read_text(encoding="utf-8")
+    review = (ROOT / "skills" / "jq-pm-review" / "SKILL.md").read_text(encoding="utf-8")
+    prototype = (ROOT / "skills" / "jq-pm-prototype" / "SKILL.md").read_text(encoding="utf-8")
+    ui_spec = (ROOT / "skills" / "jq-ui-spec" / "SKILL.md").read_text(encoding="utf-8")
+    research = (ROOT / "skills" / "jq-pm-research" / "SKILL.md").read_text(encoding="utf-8")
+    briefing = (ROOT / "skills" / "jq-pm-briefing" / "SKILL.md").read_text(encoding="utf-8")
+    context_protocol = PRODUCT_CONTEXT_PROTOCOL.read_text(encoding="utf-8")
+
+    if "逐题拷问" not in frontmatter_value(grilling, "description"):
+        fail("jq-pm-grilling 的触发描述缺少逐题拷问入口")
+    review_description = frontmatter_value(review, "description") or ""
+    if any(term in review_description for term in ("grill", "逐题拷问", "压力测试")):
+        fail("jq-pm-review 的触发描述与 jq-pm-grilling 重叠")
+    if "可点击原型" not in frontmatter_value(prototype, "description"):
+        fail("jq-pm-prototype 的触发描述缺少可点击原型入口")
+    ui_description = frontmatter_value(ui_spec, "description") or ""
+    if any(term in ui_description for term in ("制作企业产品原型", "可点击原型")):
+        fail("jq-ui-spec 的触发描述与 jq-pm-prototype 重叠")
+    if "并行 Agent" not in research:
+        fail("jq-pm-research 缺少可选并行调研规则")
+    if "跨会话交接" not in briefing:
+        fail("jq-pm-briefing 缺少跨会话交接规则")
+    for term in ("CONTEXT-MAP.md", "关键产物与路径", "敏感", "建议下一 Skill"):
+        if term not in context_protocol:
+            fail(f"产品上下文协议缺少 v0.4.1 要求：{term}")
+
+
 def validate_sensitive_terms() -> None:
     excluded_parts = {".git", "dist", "__pycache__"}
     for path in ROOT.rglob("*"):
@@ -176,6 +207,14 @@ def validate_evals(version: str) -> None:
         unknown_skills = set(expected_skills) - set(EXPECTED_SKILLS)
         if unknown_skills:
             fail(f"验收题 {case_id} 引用了未知 Skill：{', '.join(unknown_skills)}")
+        excluded_skills = case.get("excluded_skills", [])
+        if not isinstance(excluded_skills, list):
+            fail(f"验收题 {case_id} 的 excluded_skills 必须是列表")
+        unknown_excluded = set(excluded_skills) - set(EXPECTED_SKILLS)
+        if unknown_excluded:
+            fail(f"验收题 {case_id} 排除了未知 Skill：{', '.join(unknown_excluded)}")
+        if set(expected_skills) & set(excluded_skills):
+            fail(f"验收题 {case_id} 同时期望并排除了同一 Skill")
         covered_skills.update(expected_skills)
         if not case.get("prompt") or not case.get("must_behaviors"):
             fail(f"验收题 {case_id} 缺少 prompt 或 must_behaviors")
@@ -184,16 +223,27 @@ def validate_evals(version: str) -> None:
         fail(f"跨平台验收题没有覆盖全部 Skill：{', '.join(sorted(missing))}")
     if "first-principles-rebuild" not in seen_ids:
         fail("跨平台验收题缺少第一性原理推导场景")
+    required_cases = {
+        "multi-domain-context",
+        "parallel-research-optional",
+        "cross-session-handoff",
+        "ui-spec-only",
+    }
+    missing_cases = required_cases - seen_ids
+    if missing_cases:
+        fail(f"跨平台验收题缺少 v0.4.1 场景：{', '.join(sorted(missing_cases))}")
 
 
 def main() -> None:
     version = validate_versions()
     validate_skills()
+    validate_v041_behavior()
     validate_evals(version)
     validate_sensitive_terms()
     print(f"PASS: jq-pm-copilot v{version}")
     print(f"PASS: {len(EXPECTED_SKILLS)} 个 Skill 目录、跨 Skill 引用和平台清单完整")
     print("PASS: 全部 8 个 Skill 已接入第一性原理产品推导协议")
+    print("PASS: v0.4.1 多业务域、交接、调研与路由边界规则完整")
     print("PASS: 跨平台验收题覆盖全部 8 个 Skill")
     print("PASS: 未发现已配置的公司品牌词")
 

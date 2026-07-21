@@ -3,7 +3,7 @@
 ## 来源
 
 - 项目：mattpocock/skills
-- 来源目录：skills/productivity/grilling、skills/productivity/grill-me、skills/engineering/grill-with-docs、skills/engineering/domain-modeling
+- 来源目录：skills/productivity/grilling、skills/productivity/grill-me、skills/engineering/grill-with-docs、skills/engineering/domain-modeling、skills/engineering/research、skills/productivity/handoff、skills/productivity/writing-great-skills
 - 上游基准：main 分支提交 697d4ce，2026-07-13
 - 上游提交：https://github.com/mattpocock/skills/commit/697d4ce9742da558fd1ba6697c8e9775e2e302dd
 - 许可：MIT License，全文见 mattpocock-skills-LICENSE.txt
@@ -17,6 +17,10 @@ jq-pm-grilling 吸收并重新组织了以下公开方法：
 - 能从项目材料查明的事实主动读取，把真正的决定交给用户确认。
 - 在共享理解形成前不进入实施。
 - 带文档模式即时维护领域术语和长期决定记录。
+- 多业务域项目通过 CONTEXT-MAP.md 定位对应术语和决定载体。
+- 大型调研可按独立来源或对象并行收集资料，由主 Agent 完成证据复核和综合。
+- 跨会话交接引用已有成果、完成敏感信息处理并建议下一 Skill。
+- Skill 维护强调单一事实源、触发边界、渐进披露和正向目标表达。
 
 本仓库进一步增加了产品经理工作流需要的能力：
 
