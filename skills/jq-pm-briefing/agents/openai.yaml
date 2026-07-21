@@ -1,6 +1,6 @@
 interface:
   display_name: "企业产品汇报"
-  short_description: "将产品材料改写为面向领导、研发、测试、销售或群聊的可直接发送内容"
+  short_description: "将产品材料整理为面向不同受众的成稿，或生成可直接接手的跨会话交接"
   brand_color: "#3E5BF2"
   default_prompt: "使用 $jq-pm-briefing 把这些材料整理成可直接发给领导的简短汇报。"
 policy:
