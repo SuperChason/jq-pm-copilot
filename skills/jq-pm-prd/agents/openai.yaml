@@ -1,7 +1,7 @@
 interface:
   display_name: "企业 PRD"
-  short_description: "基于已确认材料编写可评审、可开发、可测试、可验收的正式产品需求文档"
+  short_description: "用产品语言编写精简、清晰、可开发和可测试的企业后台 PRD"
   brand_color: "#3E5BF2"
-  default_prompt: "使用 $jq-pm-prd 把这些已确认需求整理成可评审和可验收的 PRD。"
+  default_prompt: "使用 $jq-pm-prd 把这些已确认需求整理成企业级后台 PRD。保持通用目录骨架，重点写清详细功能设计和验收结果，细节章节按实际需求选择，不展开数据库字段、接口参数和技术实现。"
 policy:
   allow_implicit_invocation: true
