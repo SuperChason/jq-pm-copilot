@@ -859,7 +859,7 @@ codex plugin add jq-pm-copilot@jq-pm-copilot
 当前网络或代理导致 Codex 无法直接拉取 Marketplace 时，让 AI 自动采用本地快照兜底：
 
 ```bash
-git clone --branch v0.4.1 --depth 1 https://github.com/SuperChason/jq-pm-copilot.git
+git clone --branch v0.4.2 --depth 1 https://github.com/SuperChason/jq-pm-copilot.git
 codex plugin marketplace add ./jq-pm-copilot
 codex plugin add jq-pm-copilot@jq-pm-copilot
 ```
