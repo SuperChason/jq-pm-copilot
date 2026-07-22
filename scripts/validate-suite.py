@@ -171,6 +171,96 @@ def validate_v041_behavior() -> None:
             fail(f"产品上下文协议缺少 v0.4.1 要求：{term}")
 
 
+def validate_prd_standard() -> None:
+    prd_skill = (ROOT / "skills" / "jq-pm-prd" / "SKILL.md").read_text(encoding="utf-8")
+    template = (
+        ROOT / "skills" / "jq-pm-prd" / "references" / "prd-template.md"
+    ).read_text(encoding="utf-8")
+    checklist = (
+        ROOT / "skills" / "jq-pm-prd" / "references" / "prd-review-checklist.md"
+    ).read_text(encoding="utf-8")
+
+    required_chapters = (
+        "## 1. 名词与缩略语",
+        "## 2. 业务背景介绍",
+        "## 3. 产品现状分析",
+        "## 4. 关键需求",
+        "## 5. 业务流程",
+        "## 6. 功能清单",
+        "## 7. 授权场景控制点",
+        "## 8. 主数据清单",
+        "## 9. 详细功能设计",
+        "## 10. 上下游影响",
+        "## 11. 实施体系配套",
+        "## 12. 场景验证清单",
+    )
+    last_position = -1
+    for chapter in required_chapters:
+        position = template.find(chapter)
+        if position < 0:
+            fail(f"jq-pm-prd 模板缺少通用章节：{chapter}")
+        if position <= last_position:
+            fail("jq-pm-prd 模板通用 12 章顺序错误")
+        last_position = position
+
+    detailed_sections = (
+        "功能概述",
+        "界面图形",
+        "数据域说明",
+        "用户操作与系统反馈",
+        "业务规则",
+        "流程与状态",
+        "权限与数据范围",
+        "异常与边界",
+        "验收要点",
+        "产品 PRD 与研发设计的边界",
+        "Word 交付基线",
+    )
+    for section in detailed_sections:
+        if section not in template:
+            fail(f"jq-pm-prd 详细功能设计缺少：{section}")
+
+    for term in (
+        "篇幅跟随需求复杂度",
+        "不设置字数或页数目标",
+        "更细标题根据功能类型",
+        "数据库字段",
+        "流程图",
+        "A4 竖版",
+        "使用方公司名称",
+    ):
+        if term not in prd_skill:
+            fail(f"jq-pm-prd 工作流缺少当前产品要求：{term}")
+    for term in (
+        "功能概述必须使用简短文字",
+        "不使用功能概述表格",
+        "接口地址",
+        "根据实际功能选择",
+        "流程图",
+        "A4 竖版",
+    ):
+        if term not in template:
+            fail(f"jq-pm-prd 模板缺少当前产品要求：{term}")
+    for term in (
+        "功能概述没有使用固定表格",
+        "研发可以据此继续设计字段结构",
+        "使用方公司名称",
+        "逐页渲染检查",
+    ):
+        if term not in checklist:
+            fail(f"jq-pm-prd 自检清单缺少：{term}")
+
+    combined = "\n".join((prd_skill, template, checklist))
+    for obsolete_term in (
+        "字段可落库",
+        "数据处理与接口",
+        "60%—75%",
+        "统一使用 `F-`",
+    ):
+        if obsolete_term in combined:
+            fail(f"jq-pm-prd 仍包含过度固定或技术化要求：{obsolete_term}")
+
+
 def validate_sensitive_terms() -> None:
     excluded_parts = {".git", "dist", "__pycache__"}
     for path in ROOT.rglob("*"):
@@ -238,12 +328,14 @@ def main() -> None:
     version = validate_versions()
     validate_skills()
     validate_v041_behavior()
+    validate_prd_standard()
     validate_evals(version)
     validate_sensitive_terms()
     print(f"PASS: jq-pm-copilot v{version}")
     print(f"PASS: {len(EXPECTED_SKILLS)} 个 Skill 目录、跨 Skill 引用和平台清单完整")
     print("PASS: 全部 8 个 Skill 已接入第一性原理产品推导协议")
     print("PASS: v0.4.1 多业务域、交接、调研与路由边界规则完整")
+    print("PASS: jq-pm-prd 通用骨架、动态细节、产品研发边界和 Word 交付基线完整")
     print("PASS: 跨平台验收题覆盖全部 8 个 Skill")
     print("PASS: 未发现已配置的公司品牌词")
 
