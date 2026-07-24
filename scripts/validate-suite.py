@@ -207,13 +207,15 @@ def validate_prd_standard() -> None:
         "功能概述",
         "界面图形",
         "数据域说明",
-        "用户操作与系统反馈",
+        "页面操作清单",
+        "按钮/操作名称",
         "业务规则",
         "流程与状态",
         "权限与数据范围",
         "异常与边界",
         "验收要点",
         "产品 PRD 与研发设计的边界",
+        "Markdown 交付基线",
         "Word 交付基线",
     )
     for section in detailed_sections:
@@ -228,6 +230,10 @@ def validate_prd_standard() -> None:
         "流程图",
         "A4 竖版",
         "使用方公司名称",
+        "默认生成 `.md` 文件",
+        "页面操作清单",
+        "关键按钮形成闭环",
+        "只有用户明确要求 Word",
     ):
         if term not in prd_skill:
             fail(f"jq-pm-prd 工作流缺少当前产品要求：{term}")
@@ -238,12 +244,21 @@ def validate_prd_standard() -> None:
         "根据实际功能选择",
         "流程图",
         "A4 竖版",
+        "默认生成 Markdown 文件",
+        "| 数据域 | 说明 | 必填 | 备注 |",
+        "页面操作清单",
+        "可见与可用条件",
+        "9.n.4.x 【按钮/操作名称】",
+        "只有用户明确要求 Word",
     ):
         if term not in template:
             fail(f"jq-pm-prd 模板缺少当前产品要求：{term}")
     for term in (
         "功能概述没有使用固定表格",
-        "研发可以据此继续设计字段结构",
+        "数据域、说明、必填、备注",
+        "页面操作清单中的每个操作",
+        "功能清单、页面操作清单、按钮/操作级说明和验收场景",
+        "默认交付物是单个 Markdown 主文档",
         "使用方公司名称",
         "逐页渲染检查",
     ):
@@ -256,6 +271,8 @@ def validate_prd_standard() -> None:
         "数据处理与接口",
         "60%—75%",
         "统一使用 `F-`",
+        "数据域说明停留在业务对象",
+        "优先使用自然语言。只有信息较多、需要对比时才使用简表",
     ):
         if obsolete_term in combined:
             fail(f"jq-pm-prd 仍包含过度固定或技术化要求：{obsolete_term}")
@@ -318,6 +335,8 @@ def validate_evals(version: str) -> None:
         "parallel-research-optional",
         "cross-session-handoff",
         "ui-spec-only",
+        "button-level-prd",
+        "word-prd-on-request",
     }
     missing_cases = required_cases - seen_ids
     if missing_cases:
@@ -335,7 +354,7 @@ def main() -> None:
     print(f"PASS: {len(EXPECTED_SKILLS)} 个 Skill 目录、跨 Skill 引用和平台清单完整")
     print("PASS: 全部 8 个 Skill 已接入第一性原理产品推导协议")
     print("PASS: v0.4.1 多业务域、交接、调研与路由边界规则完整")
-    print("PASS: jq-pm-prd 通用骨架、动态细节、产品研发边界和 Word 交付基线完整")
+    print("PASS: jq-pm-prd 通用骨架、按钮级设计、数据域表格、Markdown 优先和产品研发边界完整")
     print("PASS: 跨平台验收题覆盖全部 8 个 Skill")
     print("PASS: 未发现已配置的公司品牌词")
 
