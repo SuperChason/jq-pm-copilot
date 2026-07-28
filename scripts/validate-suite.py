@@ -38,6 +38,27 @@ FIRST_PRINCIPLES_PROTOCOL = (
 PRODUCT_CONTEXT_PROTOCOL = (
     ROOT / "skills" / "jq-pm-grilling" / "references" / "product-context-protocol.md"
 )
+DISCOVERY_VALIDATION_LOOP = (
+    ROOT
+    / "skills"
+    / "jq-pm-discovery"
+    / "references"
+    / "discovery-validation-loop.md"
+)
+KILL_ASSUMPTION_PROTOCOL = (
+    ROOT
+    / "skills"
+    / "jq-pm-grilling"
+    / "references"
+    / "kill-assumption-protocol.md"
+)
+INTENT_EVIDENCE_REVIEW = (
+    ROOT
+    / "skills"
+    / "jq-pm-review"
+    / "references"
+    / "intent-evidence-review.md"
+)
 
 
 def fail(message: str) -> None:
@@ -278,6 +299,105 @@ def validate_prd_standard() -> None:
             fail(f"jq-pm-prd 仍包含过度固定或技术化要求：{obsolete_term}")
 
 
+def validate_v044_workflows() -> None:
+    discovery = (ROOT / "skills" / "jq-pm-discovery" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    grilling = (ROOT / "skills" / "jq-pm-grilling" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    review = (ROOT / "skills" / "jq-pm-review" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    ci_workflow = ROOT / ".github" / "workflows" / "validate.yml"
+    unit_tests = (
+        ROOT / "tests" / "test_validate_suite.py",
+        ROOT / "tests" / "test_release_consistency.py",
+    )
+
+    expected_references = {
+        DISCOVERY_VALIDATION_LOOP: (
+            "八类风险",
+            "承重假设",
+            "通过阈值",
+            "失败动作",
+            "设置确认点",
+            "回写结果",
+        ),
+        KILL_ASSUMPTION_PROTOCOL: (
+            "最强成立条件",
+            "失败条件",
+            "本周证据",
+            "停止或转向阈值",
+            "最低成本验证",
+            "三到五项",
+        ),
+        INTENT_EVIDENCE_REVIEW: (
+            "需求意图",
+            "原型表现",
+            "实现证据",
+            "验证证据",
+            "文档过期",
+            "材料不足",
+            "职责边界",
+        ),
+    }
+    for path, anchors in expected_references.items():
+        if not path.is_file():
+            fail(f"缺少 v0.4.4 工作流协议：{path.relative_to(ROOT)}")
+        text = path.read_text(encoding="utf-8")
+        for anchor in anchors:
+            if anchor not in text:
+                fail(f"{path.relative_to(ROOT)} 缺少 v0.4.4 要求：{anchor}")
+
+    for term in (
+        "references/discovery-validation-loop.md",
+        "八类风险假设",
+        "承重假设排序",
+        "实验结果回写",
+    ):
+        if term not in discovery:
+            fail(f"jq-pm-discovery 缺少 v0.4.4 验证闭环要求：{term}")
+
+    for term in (
+        "references/kill-assumption-protocol.md",
+        "最强成立条件",
+        "三到五项假设",
+        "停止或转向阈值",
+        "最低成本验证",
+    ):
+        if term not in grilling:
+            fail(f"jq-pm-grilling 缺少 v0.4.4 承重假设要求：{term}")
+
+    for term in (
+        "references/intent-evidence-review.md",
+        "需求意图、原型表现、实现证据和验证证据",
+        "实现偏差",
+        "文档过期",
+        "缺少验证",
+        "材料不足",
+    ):
+        if term not in review:
+            fail(f"jq-pm-review 缺少 v0.4.4 意图证据要求：{term}")
+
+    if not ci_workflow.is_file():
+        fail("缺少 v0.4.4 GitHub Actions 自动校验")
+    ci_text = ci_workflow.read_text(encoding="utf-8")
+    for term in (
+        "python3 scripts/validate-suite.py",
+        "python3 -m unittest discover -s tests -v",
+        "python3 scripts/build-release.py",
+        "shasum -a 256 -c SHA256SUMS.txt",
+        "unzip -t",
+    ):
+        if term not in ci_text:
+            fail(f"GitHub Actions 缺少 v0.4.4 质量门：{term}")
+
+    for path in unit_tests:
+        if not path.is_file():
+            fail(f"缺少 v0.4.4 单元测试：{path.relative_to(ROOT)}")
+
+
 def validate_sensitive_terms() -> None:
     excluded_parts = {".git", "dist", "__pycache__"}
     for path in ROOT.rglob("*"):
@@ -337,10 +457,13 @@ def validate_evals(version: str) -> None:
         "ui-spec-only",
         "button-level-prd",
         "word-prd-on-request",
+        "discovery-validation-loop",
+        "kill-assumption-red-team",
+        "intent-evidence-review",
     }
     missing_cases = required_cases - seen_ids
     if missing_cases:
-        fail(f"跨平台验收题缺少 v0.4.1 场景：{', '.join(sorted(missing_cases))}")
+        fail(f"跨平台验收题缺少必需场景：{', '.join(sorted(missing_cases))}")
 
 
 def main() -> None:
@@ -348,6 +471,7 @@ def main() -> None:
     validate_skills()
     validate_v041_behavior()
     validate_prd_standard()
+    validate_v044_workflows()
     validate_evals(version)
     validate_sensitive_terms()
     print(f"PASS: jq-pm-copilot v{version}")
@@ -355,6 +479,7 @@ def main() -> None:
     print("PASS: 全部 8 个 Skill 已接入第一性原理产品推导协议")
     print("PASS: v0.4.1 多业务域、交接、调研与路由边界规则完整")
     print("PASS: jq-pm-prd 通用骨架、按钮级设计、数据域表格、Markdown 优先和产品研发边界完整")
+    print("PASS: v0.4.4 发现验证、承重假设和意图证据评审工作流完整")
     print("PASS: 跨平台验收题覆盖全部 8 个 Skill")
     print("PASS: 未发现已配置的公司品牌词")
 
