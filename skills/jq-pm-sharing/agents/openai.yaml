@@ -1,0 +1,7 @@
+interface:
+  display_name: "产品经验分享"
+  short_description: "把真实项目经历整理成自然、有现场感、能引发讨论的分享"
+  brand_color: "#3E5BF2"
+  default_prompt: "使用 $jq-pm-sharing 把这段真实项目经历整理成一份自然的内部分享稿。"
+policy:
+  allow_implicit_invocation: true

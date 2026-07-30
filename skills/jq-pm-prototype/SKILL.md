@@ -9,6 +9,8 @@ description: 根据 PRD、流程或产品设想制作符合企业 UI 规范的�
 
 执行前读取 ../jq-pm-grilling/references/platform-capability-fallback.md。缺少浏览器或脚本能力时执行静态走查并附人工验收清单，不声称完成视觉实测。
 
+生成面向用户的正文、说明、建议或交付稿前，读取 ../jq-pm-grilling/references/user-facing-writing-style.md。页面说明和演示内容先讲具体任务、操作与反馈，减少空泛设计术语。
+
 ## 能力说明
 
 - **核心任务**：把 PRD、流程和页面设想转成可点击、可演示、可走查的企业后台原型。
@@ -17,7 +19,7 @@ description: 根据 PRD、流程或产品设想制作符合企业 UI 规范的�
 - **设计原则**：先保证任务闭环和状态完整，再提高视觉完成度；所有新增业务判断都显式标记。
 - **能力边界**：原型不等同于生产代码，不用视觉效果遮盖流程缺口，不自行决定影响权限、数据或业务口径的规则。
 - **上游来源**：jq-pm-prd、jq-pm-grilling 沉淀的术语与决定、业务流程图、现有产品、线框图和明确的演示目标。
-- **下游衔接**：jq-ui-spec 提供界面基线；原型与 PRD 一起进入 jq-pm-review；演示内容进入 jq-pm-briefing。
+- **下游衔接**：jq-ui-spec 提供界面基线；原型与 PRD 一起进入 jq-pm-review；正式演示口径进入 jq-pm-briefing，案例或经验分享进入 jq-pm-sharing。
 
 ## 开始条件
 

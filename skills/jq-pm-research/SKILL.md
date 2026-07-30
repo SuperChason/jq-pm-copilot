@@ -9,6 +9,8 @@ description: 围绕产品决策开展可信的用户、竞品、行业、政策�
 
 执行前读取 ../jq-pm-grilling/references/platform-capability-fallback.md。缺少联网或文件能力时降低结论确定性，保留待核验项，不虚构来源或已执行动作。
 
+生成面向用户的正文、说明、建议或交付稿前，读取 ../jq-pm-grilling/references/user-facing-writing-style.md，保持证据、具体场景和产品判断之间的关系清楚。
+
 ## 能力说明
 
 - **核心任务**：围绕一个具体产品决策，收集、核验和组织用户、竞品、行业、政策或技术证据。
@@ -17,7 +19,7 @@ description: 围绕产品决策开展可信的用户、竞品、行业、政策�
 - **证据原则**：优先官方和一手来源；记录发布日期、事件日期和适用范围；区分事实、推断和建议。
 - **能力边界**：不以材料数量代替结论质量，不用无法核验的转述支撑重大判断，不自动把研究启发升级为正式需求。
 - **上游来源**：jq-pm-discovery 的信息缺口、jq-pm-grilling 的待验证假设、路线规划问题、竞品观察任务、方案选型或事实核查请求。
-- **下游衔接**：确认后的结论进入 jq-pm-prd；需要对外说明时进入 jq-pm-briefing；研究问题仍含糊时退回 jq-pm-discovery。
+- **下游衔接**：确认后的结论进入 jq-pm-prd；正式说明进入 jq-pm-briefing，研究经历或案例分享进入 jq-pm-sharing；研究问题仍含糊时退回 jq-pm-discovery。
 
 ## 工作流程
 

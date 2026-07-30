@@ -9,6 +9,8 @@ description: 把已确认的产品需求整理成可评审、可开发、可测�
 
 执行前读取 ../jq-pm-grilling/references/platform-capability-fallback.md。无法读取或写入项目文件时，以完整成稿和产品上下文交接块维持阶段衔接。
 
+生成面向用户的正文、说明、建议或交付稿前，读取 ../jq-pm-grilling/references/user-facing-writing-style.md。PRD 保留正式结构，具体功能描述使用直接、自然、可核验的产品语言。
+
 ## 能力说明
 
 - **核心任务**：把已确认的产品结论转化为业务、产品、研发和测试可以共同评审的生产级 PRD。
