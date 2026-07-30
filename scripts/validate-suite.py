@@ -17,6 +17,7 @@ EXPECTED_SKILLS = (
     "jq-pm-prototype",
     "jq-pm-review",
     "jq-pm-briefing",
+    "jq-pm-sharing",
     "jq-ui-spec",
 )
 PLATFORM_MANIFESTS = (
@@ -37,6 +38,9 @@ FIRST_PRINCIPLES_PROTOCOL = (
 )
 PRODUCT_CONTEXT_PROTOCOL = (
     ROOT / "skills" / "jq-pm-grilling" / "references" / "product-context-protocol.md"
+)
+USER_FACING_WRITING_STYLE = (
+    ROOT / "skills" / "jq-pm-grilling" / "references" / "user-facing-writing-style.md"
 )
 DISCOVERY_VALIDATION_LOOP = (
     ROOT
@@ -126,6 +130,8 @@ def validate_skills() -> None:
     skills_root = ROOT / "skills"
     if not FIRST_PRINCIPLES_PROTOCOL.is_file():
         fail("缺少第一性原理产品推导协议")
+    if not USER_FACING_WRITING_STYLE.is_file():
+        fail("缺少面向用户的轻度整理表达协议")
     actual_skills = tuple(sorted(path.name for path in skills_root.iterdir() if path.is_dir()))
     if set(actual_skills) != set(EXPECTED_SKILLS):
         fail(
@@ -152,6 +158,8 @@ def validate_skills() -> None:
             fail(f"{skill_file.relative_to(ROOT)} 未接入跨平台能力降级协议")
         if "first-principles-protocol.md" not in text:
             fail(f"{skill_file.relative_to(ROOT)} 未接入第一性原理产品推导协议")
+        if "user-facing-writing-style.md" not in text:
+            fail(f"{skill_file.relative_to(ROOT)} 未接入轻度整理表达协议")
 
         for relative_reference in REFERENCE_PATTERN.findall(text):
             target = (skill_dir / relative_reference).resolve()
@@ -398,6 +406,51 @@ def validate_v044_workflows() -> None:
             fail(f"缺少 v0.4.4 单元测试：{path.relative_to(ROOT)}")
 
 
+def validate_natural_writing_and_sharing() -> None:
+    protocol = USER_FACING_WRITING_STYLE.read_text(encoding="utf-8")
+    for term in (
+        "默认方式：轻度整理",
+        "保留用户原本要表达的意思",
+        "具体场景、项目事实和实际问题",
+        "业务对象、角色、流程、规则、字段、指标、数据字典、系统关系",
+        "事实、推断和待确认项",
+        "避免过度加工",
+        "用户本人会说的话",
+    ):
+        if term not in protocol:
+            fail(f"轻度整理表达协议缺少要求：{term}")
+
+    briefing = (ROOT / "skills" / "jq-pm-briefing" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    sharing = (ROOT / "skills" / "jq-pm-sharing" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    briefing_description = frontmatter_value(briefing, "description") or ""
+    sharing_description = frontmatter_value(sharing, "description") or ""
+
+    if "正式沟通内容" not in briefing_description:
+        fail("jq-pm-briefing 没有收窄到正式事务沟通")
+    if "会议发言" in briefing_description:
+        fail("jq-pm-briefing 仍保留容易吞并经验分享的泛化触发词")
+    if "jq-pm-sharing" not in briefing:
+        fail("jq-pm-briefing 缺少经验分享分流")
+
+    for term in ("内部分享", "案例复盘", "个人经验", "jq-pm-briefing"):
+        if term not in sharing_description:
+            fail(f"jq-pm-sharing 触发描述缺少：{term}")
+    for term in (
+        "用户原话",
+        "一次只问一个问题",
+        "业务对象、指标、属性、规则、字段和数据字典",
+        "事实、根据事实形成的推断、当前待确认的内容",
+        "保留必要的陌生、犹豫、失败和转折",
+        "用户是否真的会这样说",
+    ):
+        if term not in sharing:
+            fail(f"jq-pm-sharing 工作流缺少：{term}")
+
+
 def validate_sensitive_terms() -> None:
     excluded_parts = {".git", "dist", "__pycache__"}
     for path in ROOT.rglob("*"):
@@ -460,6 +513,7 @@ def validate_evals(version: str) -> None:
         "discovery-validation-loop",
         "kill-assumption-red-team",
         "intent-evidence-review",
+        "narrative-experience-sharing",
     }
     missing_cases = required_cases - seen_ids
     if missing_cases:
@@ -472,15 +526,17 @@ def main() -> None:
     validate_v041_behavior()
     validate_prd_standard()
     validate_v044_workflows()
+    validate_natural_writing_and_sharing()
     validate_evals(version)
     validate_sensitive_terms()
     print(f"PASS: jq-pm-copilot v{version}")
     print(f"PASS: {len(EXPECTED_SKILLS)} 个 Skill 目录、跨 Skill 引用和平台清单完整")
-    print("PASS: 全部 8 个 Skill 已接入第一性原理产品推导协议")
+    print(f"PASS: 全部 {len(EXPECTED_SKILLS)} 个 Skill 已接入第一性原理和轻度整理表达协议")
     print("PASS: v0.4.1 多业务域、交接、调研与路由边界规则完整")
     print("PASS: jq-pm-prd 通用骨架、按钮级设计、数据域表格、Markdown 优先和产品研发边界完整")
     print("PASS: v0.4.4 发现验证、承重假设和意图证据评审工作流完整")
-    print("PASS: 跨平台验收题覆盖全部 8 个 Skill")
+    print("PASS: 经验分享与正式汇报边界、自然表达和项目下钻规则完整")
+    print(f"PASS: 跨平台验收题覆盖全部 {len(EXPECTED_SKILLS)} 个 Skill")
     print("PASS: 未发现已配置的公司品牌词")
 
 

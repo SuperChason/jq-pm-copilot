@@ -9,6 +9,8 @@ description: 正式审查已有 PRD、原型或产品方案，输出影响价值
 
 执行前读取 ../jq-pm-grilling/references/platform-capability-fallback.md。缺少材料或验证工具时明确评审可信度和未执行项，继续完成能够可靠判断的部分。
 
+生成面向用户的正文、说明、建议或交付稿前，读取 ../jq-pm-grilling/references/user-facing-writing-style.md。评审意见先写具体位置、证据和影响，再提炼判断。
+
 评审材料同时包含 PRD、原型、当前实现、运行结果或测试记录中的两类及以上，或用户要求检查文档要求是否真正落地时，读取 references/intent-evidence-review.md，建立需求意图、原型表现、实现证据和验证证据的对照。
 
 ## 能力说明
@@ -19,7 +21,7 @@ description: 正式审查已有 PRD、原型或产品方案，输出影响价值
 - **评审原则**：先检查价值、范围和主流程，再检查规则、状态、权限、数据、异常、验收和界面细节。
 - **能力边界**：不把个人审美偏好当成硬性缺陷，不输出无法定位或无法验证的空泛意见，不在仅请求评审时擅自改写原文件。
 - **上游来源**：jq-pm-prd、jq-pm-prototype、jq-ui-spec、领域术语、研究结论和历史决策。
-- **下游衔接**：重大未知项进入 jq-pm-grilling；问题回到对应 Skill 修正；目标和范围根本不清时退回 jq-pm-discovery；评审结论进入 jq-pm-briefing。
+- **下游衔接**：重大未知项进入 jq-pm-grilling；问题回到对应 Skill 修正；目标和范围根本不清时退回 jq-pm-discovery；正式评审结论进入 jq-pm-briefing，案例复盘进入 jq-pm-sharing。
 
 ## 评审流程
 

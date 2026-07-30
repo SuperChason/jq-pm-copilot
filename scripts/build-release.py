@@ -34,6 +34,7 @@ WORKBUDDY_SKILLS = (
     "jq-pm-prototype",
     "jq-pm-review",
     "jq-pm-briefing",
+    "jq-pm-sharing",
     "jq-ui-spec",
 )
 FIXED_ZIP_TIME = (2026, 1, 1, 0, 0, 0)
@@ -94,7 +95,7 @@ def build_workbuddy_bundle(release_version: str) -> Path:
             "version": release_version,
             "platform": "WorkBuddy",
             "install_order": list(WORKBUDDY_SKILLS),
-            "note": "解压本文件后，将 8 个 Skill ZIP 全部导入 WorkBuddy。",
+            "note": f"解压本文件后，将 {len(WORKBUDDY_SKILLS)} 个 Skill ZIP 全部导入 WorkBuddy。",
         }
         info = zipfile.ZipInfo("workbuddy-manifest.json", FIXED_ZIP_TIME)
         info.compress_type = zipfile.ZIP_DEFLATED

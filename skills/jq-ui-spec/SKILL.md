@@ -9,6 +9,8 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 
 执行前读取 ../jq-pm-grilling/references/platform-capability-fallback.md。无浏览器、截图或脚本能力时采用静态检查和人工验收清单，并明确未完成的实测项目。
 
+生成面向用户的正文、说明、建议或交付稿前，读取 ../jq-pm-grilling/references/user-facing-writing-style.md。界面建议先说明具体页面、任务和当前问题，再引用规范与修正值。
+
 ## 能力说明
 
 - **核心任务**：为企业后台页面提供统一的视觉、组件、布局、状态和交互基线，并对现有界面进行可执行审查。
