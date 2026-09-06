@@ -11,6 +11,8 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 
 生成面向用户的正文、说明、建议或交付稿前，读取 ../jq-pm-grilling/references/user-facing-writing-style.md。界面建议先说明具体页面、任务和当前问题，再引用规范与修正值。
 
+以下流程与输出按当前交付范围选用，复用已有材料和决定；省略不适用项。
+
 ## 能力说明
 
 - **核心任务**：为企业后台页面提供统一的视觉、组件、布局、状态和交互基线，并对现有界面进行可执行审查。
@@ -23,8 +25,8 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 
 ## 选择任务
 
-- 生成或改造界面：依次读取 references/design-decisions.md、design-tokens.md、components.md、page-patterns.md、interaction-states.md 和 accessibility.md。
-- 审查界面：读取上述文件及 references/review-checklist.md；若有代码，运行 scripts/check-enterprise-ui.mjs。
+- 生成或改造界面：根据当前变更按需读取 references/design-decisions.md、design-tokens.md、components.md、page-patterns.md、interaction-states.md 或 accessibility.md，不必每次全量加载。
+- 审查界面：按审查范围读取相关规范及 references/review-checklist.md；代码符合检查器支持的 HTML 形态时运行 scripts/check-enterprise-ui.mjs。
 - 制作原型：结合 jq-pm-prototype 使用 assets/prototype-starter。
 
 ## 生成流程
@@ -33,7 +35,7 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 2. 识别页面类型、用户核心任务、信息层级和必需状态。布局或交互主要来自旧系统和竞品照搬时，读取 ../jq-pm-grilling/references/first-principles-protocol.md 执行快速检查，从任务、信息、动作、反馈和可访问性重新推导界面层级。
 3. 使用设计令牌，避免在页面中散落新的颜色、圆角、阴影和间距值。
 4. 先组合标准组件和页面模式，再处理业务特有结构。
-5. 补齐加载、空、错误、无权限、禁用、成功和部分完成状态。
+5. 按本次任务覆盖实际适用的加载、空、错误、无权限、禁用、成功和部分完成状态，避免为不适用状态添加页面或逻辑。
 6. 检查键盘操作、焦点、对比度、标签和错误提示。
 7. 在浏览器中检查常见桌面视口和关键交互。
 
