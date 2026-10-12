@@ -530,6 +530,7 @@ def main() -> None:
     validate_evals(version)
     validate_sensitive_terms()
     print(f"PASS: jq-pm-copilot v{version}")
+    print("说明：以下为静态结构、引用及规则锚点校验，不代表行为场景已执行或通过。")
     print(f"PASS: {len(EXPECTED_SKILLS)} 个 Skill 目录、跨 Skill 引用和平台清单完整")
     print(f"PASS: 全部 {len(EXPECTED_SKILLS)} 个 Skill 已接入第一性原理和轻度整理表达协议")
     print("PASS: v0.4.1 多业务域、交接、调研与路由边界规则完整")

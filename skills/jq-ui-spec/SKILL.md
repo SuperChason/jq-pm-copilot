@@ -26,7 +26,7 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 ## 选择任务
 
 - 生成或改造界面：根据当前变更按需读取 references/design-decisions.md、design-tokens.md、components.md、page-patterns.md、interaction-states.md 或 accessibility.md，不必每次全量加载。
-- 审查界面：按审查范围读取相关规范及 references/review-checklist.md；代码符合检查器支持的 HTML 形态时运行 scripts/check-enterprise-ui.mjs。
+- 审查界面：按审查范围读取相关规范及 references/review-checklist.md；代码采用本套件默认令牌时运行 scripts/check-enterprise-ui.mjs；项目自有设计系统采用对应检查，不能把本检查器对默认变量或色值的要求当成项目缺陷。
 - 制作原型：结合 jq-pm-prototype 使用 assets/prototype-starter。
 
 ## 生成流程
@@ -47,7 +47,7 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 4. 每条意见包含位置、当前表现、规范依据、建议值和验证方式。
 5. 能自动修复且用户要求修改时，只改与本次任务相关的内容。
 
-## 强制基线
+## 默认基线与必需交互约束
 
 - 默认主题色为 #3E5BF2，正文主色为 #1A1A1A，页面背景为 #F5F5F7。
 - 默认组件圆角为 4px；胶囊标签和圆形控件属于明确例外。
@@ -58,4 +58,4 @@ description: 建立、应用或审查企业域 PC 端后台 UI 基线，统一�
 
 本 Skill 基于团队提供的 原始企业 UI 规范 v1.2 整理。冲突项和本阶段取值记录在 references/design-decisions.md。
 
-交付前检查：页面使用统一令牌和标准组件；核心操作层级清晰；加载、空、错误、禁用、无权限和成功状态完整；键盘焦点、对比度、标签和错误提示满足基础可访问性要求。
+交付前检查：页面使用统一令牌和标准组件；核心操作层级清晰；当前任务实际适用的加载、空、错误、禁用、无权限和成功状态有对应反馈；键盘焦点、对比度、标签和错误提示满足基础可访问性要求。
